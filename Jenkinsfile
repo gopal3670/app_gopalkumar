@@ -56,10 +56,4 @@ pipeline {
             }
         }
     }
-	post {
-		always {
-			echo 'Generate Test Reports'
-			xunit([MSTest(deleteOutputFiles: true, failIfNotNew: true, pattern: 'test-project/TestResults/nagpMultiPipelineTestFileReport.xml', skipNoTestFiles: true)])
-		}
-	}
 }
