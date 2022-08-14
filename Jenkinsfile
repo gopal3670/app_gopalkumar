@@ -27,7 +27,7 @@ pipeline {
             steps {
 				echo 'Starting sonarqube analysis'
 				withSonarQubeEnv('Sonar'){
-					bat "dotnet ${sonarHome}\\SonarScanner.MSBuild.dll begin /k:\"nagp-assignment\" /d:sonar.verbose=true -d:sonar.cs.xunit.reportsPath='test-project/TestResults/nagpMultiPipelineTestFileReport.xml'" 
+					bat "dotnet ${sonarHome}\\SonarScanner.MSBuild.dll begin /k:\"sonar-gopalkumar\" /d:sonar.verbose=true -d:sonar.cs.xunit.reportsPath='test-project/TestResults/nagpMultiPipelineTestFileReport.xml'" 
 				}
             }
         }
