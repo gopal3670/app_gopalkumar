@@ -27,7 +27,7 @@ pipeline {
             steps {
 				echo 'Starting sonarqube analysis'
 				withSonarQubeEnv('Sonar'){
-					bat "dotnet ${sonarhome}\\SonarScanner.MSBuild.dll begin /k:\"nagp-assignment\" /d:sonar.verbose=true -d:sonar.cs.xunit.reportsPath='test-project/TestResults/nagpMultiPipelineTestFileReport.xml'" 
+					bat "dotnet sonarscanner begin /k:"sonar-gopalkumar" /d:sonar.host.url="http://localhost:9000"  /d:sonar.login="sqp_7c0b8d4830e37b4d3997cb5a9f2598b77aa5ee65"" 
 				}
             }
         }
@@ -45,7 +45,7 @@ pipeline {
             steps {
 				echo 'Stopping sonarqube analysis'
 				withSonarQubeEnv('Sonar'){
-					bat "dotnet ${sonarHome}\\SonarScanner.MSBuild.dll end" 
+					bat "dotnet sonarscanner end /d:sonar.login="sqp_7c0b8d4830e37b4d3997cb5a9f2598b77aa5ee65"" 
 				}
             }
         }
