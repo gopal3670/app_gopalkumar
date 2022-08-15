@@ -2,7 +2,6 @@ pipeline {
     agent any
 	
 	environment {
-		def scannerHome = tool: 'sonar_scanner_dotnet'
 		username = 'admin'
 		appname = 'SampleApp'
 	}
@@ -26,6 +25,7 @@ pipeline {
 		stage('Start SonarQube Analysis'){
             steps {
 				echo 'Starting sonarqube analysis'
+				def scannerHome = tool: 'sonar_scanner_dotnet'
 				withSonarQubeEnv(Test_Sonar) {
 				  bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:\"sonar-gopalkumar\""
 				  bat "dotnet build"
