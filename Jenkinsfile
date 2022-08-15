@@ -1,10 +1,15 @@
 pipeline {
     agent any
+	
+	environment {
+		username = 'gopalkumar'
+		appname = 'DevOpsApp'
+	}
     
     stages {
         stage('Code Checkout'){
             steps {
-                git branch: 'main', url: 'https://github.com/gopal3670/app_gopalkumar.git'
+                git branch: 'develop', url: 'https://github.com/gopal3670/app_gopalkumar.git'
             }
         }
         stage('Nuget Restore'){
@@ -12,19 +17,16 @@ pipeline {
                 bat 'dotnet restore'
             }
         }
-        stage('Clean'){
+        stage('Code Build'){
             steps {
-                bat 'dotnet clean'
-            }
-        }
-        stage('Build'){
-            steps {
+				bat 'dotnet clean'
                 bat 'dotnet build'
             }
         }
-        stage('Test'){
+        stage('Release Artifact'){
             steps {
-                bat 'dotnet test --logger:trx;LogFileName=appgopalkumartest.xml'
+				echo 'Release Artifact Step'
+				bat "dotnet publish -c Release -o ${appname}/app/${username}" 
             }
         }
     }
