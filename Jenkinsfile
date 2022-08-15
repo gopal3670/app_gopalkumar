@@ -2,7 +2,7 @@ pipeline {
     agent any
 	
 	environment {
-		scannerHome = tool name: 'sonar_scanner_dotnet'
+		def scannerHome = tool: 'sonar_scanner_dotnet'
 		username = 'admin'
 		appname = 'SampleApp'
 	}
@@ -26,8 +26,10 @@ pipeline {
 		stage('Start SonarQube Analysis'){
             steps {
 				echo 'Starting sonarqube analysis'
-				withSonarQubeEnv('Test_Sonar'){
-					bat 'dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:\"sonar-gopalkumar\"'
+				withSonarQubeEnv(Test_Sonar) {
+				  bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:\"sonar-gopalkumar\""
+				  bat "dotnet build"
+				  bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll end"
 				}
             }
         }
