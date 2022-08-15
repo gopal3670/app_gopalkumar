@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Code Checkout'){
             steps {
-                git branch: 'main', url: 'https://github.com/gopal3670/app_gopalkumar.git'
+                git branch: 'master', url: 'https://github.com/gopal3670/app_gopalkumar.git'
             }
         }
         stage('Nuget Restore'){
