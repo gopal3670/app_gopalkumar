@@ -26,7 +26,7 @@ pipeline {
 		stage('Start SonarQube Analysis'){
             steps {
 				echo 'Starting sonarqube analysis'
-				withSonarQubeEnv('Sonar'){
+				withSonarQubeEnv('Test_Sonar'){
 					bat 'dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:\"sonar-gopalkumar\"'
 				}
             }
@@ -44,7 +44,7 @@ pipeline {
 		stage('Stop SonarQube Analysis'){
             steps {
 				echo 'Stopping sonarqube analysis'
-				withSonarQubeEnv('Sonar'){
+				withSonarQubeEnv('Test_Sonar'){
 					bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll end" 
 				}
             }
