@@ -28,9 +28,31 @@ pipeline {
 				echo 'Starting sonarqube analysis'
 				withSonarQubeEnv('Test_Sonar') {
 				  bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:\"sonar-gopalkumar\""
-				  bat "dotnet build"
-				  bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll end"
 				}
+            }
+        }
+		stage('Build'){
+            steps {
+                bat 'dotnet build'
+            }
+        }
+        stage('Test'){
+            steps {
+                bat 'dotnet test --logger:trx;LogFileName=appgopalkumartest.xml'
+            }
+        }
+		stage('Stop SonarQube Analysis'){
+            steps {
+				echo 'Stopping sonarqube analysis'
+				withSonarQubeEnv('Test_Sonar'){
+					bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll end" 
+				}
+            }
+        }
+		stage('Release Artifact'){
+            steps {
+				echo 'Release Artifact Step'
+				bat "dotnet publish -c Release -o ${appname}/app/${username}" 
             }
         }
     }
