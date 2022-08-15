@@ -2,7 +2,7 @@ pipeline {
     agent any
 	
 	environment {
-		sonarhome = tool name: 'sonar_scanner_dotnet'
+		scannerHome = tool: 'sonar_scanner_dotnet'
 		username = 'admin'
 		appname = 'SampleApp'
 	}
@@ -27,7 +27,7 @@ pipeline {
             steps {
 				echo 'Starting sonarqube analysis'
 				withSonarQubeEnv('Sonar'){
-					bat "dotnet sonarscanner begin /k:'sonar-gopalkumar' /d:sonar.host.url='http://localhost:9000' /d:sonar.login='sqp_7c0b8d4830e37b4d3997cb5a9f2598b77aa5ee65'"
+					bat 'dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:\"sonar-gopalkumar\"'
 				}
             }
         }
@@ -45,7 +45,7 @@ pipeline {
             steps {
 				echo 'Stopping sonarqube analysis'
 				withSonarQubeEnv('Sonar'){
-					bat "dotnet sonarscanner end /d:sonar.login='sqp_7c0b8d4830e37b4d3997cb5a9f2598b77aa5ee65'" 
+					bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll end" 
 				}
             }
         }
