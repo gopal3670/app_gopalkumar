@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagp-devops-us-deployment
+  namespace: kubernetes-cluster-gopalkumar
+  labels:
+    app: nagp-devops-us
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nagp-devops-us
+  template:
+    metadata:
+      name:  nagp-devops-us-pod
+      labels:
+        app: nagp-devops-us
+    spec:
+      containers:
+      - name: nagp-devops-us-container
+        image: gopal3670/i-gopalkumar-master:latest
+        envFrom: 
+        - configMapRef:
+            name: nagp-devops-us-config
+        - secretRef:
+            name: nagp-devops-us-secret
