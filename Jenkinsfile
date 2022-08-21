@@ -1,11 +1,9 @@
 pipeline {
     agent any
-	
 	environment {
 		username = 'gopalkumar'
 		appname = 'DevOpsApp'
 	}
-    
     stages {
         stage('Code Checkout'){
             steps {
@@ -25,7 +23,6 @@ pipeline {
         }
         stage('Release Artifact'){
             steps {
-				echo 'Release Artifact Step'
 				bat "dotnet publish -c Release -o ${appname}/app/${username}" 
             }
         }
