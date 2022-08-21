@@ -21,6 +21,6 @@ spec:
         image: gopal3670/i-gopalkumar-develop:latest
         envFrom: 
         - configMapRef:
-            name: nagp-devops-us-config
+            name: nagp-devops-us-develop-config
         - secretRef:
-            name: nagp-devops-us-secret
+            name: nagp-devops-us-develop-secret
