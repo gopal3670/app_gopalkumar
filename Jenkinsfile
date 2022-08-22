@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Test Case Execution'){
             steps {
-                bat 'dotnet test test-project\test-project.csproj --logger:trx;LogFileName=appgopalkumartest.xml'
+                bat 'dotnet test test-project/test-project.csproj --logger:trx;LogFileName=appgopalkumartest.xml'
             }
         }
 		stage('Stop SonarQube Analysis'){
