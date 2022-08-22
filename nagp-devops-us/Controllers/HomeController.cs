@@ -13,18 +13,14 @@ namespace nagp_devops_us.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public static IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _configuration = configuration;
         }
 
         public IActionResult Index()
         {
-            //ViewBag.BaseUrl = _configuration.GetValue<string>("BASE_URL");
-            //ViewBag.Environment = _configuration.GetValue<string>("ENVIRONMENT");
             ViewBag.BaseUrl = Environment.GetEnvironmentVariable("BASE_URL");
             ViewBag.Environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
             ViewBag.Username = Environment.GetEnvironmentVariable("username");
