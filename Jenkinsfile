@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Test Case Execution'){
             steps {
-                bat 'dotnet test --logger:trx;LogFileName=appgopalkumartest.xml'
+                bat 'dotnet test test-project\test-project.csproj --logger:trx;LogFileName=appgopalkumartest.xml'
             }
         }
 		stage('Stop SonarQube Analysis'){
@@ -44,7 +44,7 @@ pipeline {
     post {
 		always {
 			echo 'Generate Test Reports'
-			xunit([MSTest(deleteOutputFiles: true, failIfNotNew: true, pattern: 'test-project/TestResults/nagpMultiPipelineTestFileReport.xml', skipNoTestFiles: true)])
+			xunit([MSTest(deleteOutputFiles: true, failIfNotNew: true, pattern: 'test-project/TestResults/appgopalkumartest.xml', skipNoTestFiles: true)])
 		}
 	}
 }
